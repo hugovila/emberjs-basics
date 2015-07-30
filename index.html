@@ -8,9 +8,69 @@
 </head>
 <body>
   <script type="text/x-handlebars">
-    <h2>Welcome to Ember.js</h2>
+    <h1>Welcome to Ember.js</h1>
 
+    <nav>
+        {{#link-to 'index'}}Home{{/link-to}}
+        {{link-to 'Friends' 'friends'}}
+        {{link-to 'Issues' 'issues'}}
+        {{link-to 'Failures' 'failures'}}
+        {{link-to 'Details' 'failures.details'}}
+        {{link-to 'About' 'about'}}
+        {{link-to 'Contact' 'contact'}}
+
+    </nav>
     {{outlet}}
+  </script>
+
+  <script type="text/x-handlebars" id="friends">
+      <h2>My Friends</h2>
+
+      <ul>
+          {{#each friend in model}}
+          <li>{{#link-to 'friends.about' friend}} {{friend.name}} {{/link-to}}</li>
+          {{/each}}
+      </ul>
+
+      {{outlet}}
+  </script>
+
+  <script type="text/x-handlebars" id="friends/about">
+      <p>
+          Name: {{name}}
+      </p>
+      <p>
+          About: {{about}}
+      </p>
+  </script>
+
+  <script type="text/x-handlebars" id="friends/index">
+    <ul>
+    {{#each item in model}}
+      <li>{{item}}</li>
+    {{/each}}
+    </ul>
+  </script>
+
+  <script type="text/x-handlebars" id="issues">
+      <h3>Issues</h3>
+  </script>
+
+  <script type="text/x-handlebars" id="failures">
+      <h2>Failures</h2>
+      {{outlet}}
+  </script>
+
+  <script type="text/x-handlebars" id="failures/index">
+      <ul>
+      {{#each item in model}}
+        <li>{{item}}</li>
+      {{/each}}
+      </ul>
+  </script>
+
+  <script type="text/x-handlebars" id="failures/details">
+      <h3>Details</h3>
   </script>
 
   <script type="text/x-handlebars" id="index">
@@ -19,6 +79,14 @@
       <li>{{item}}</li>
     {{/each}}
     </ul>
+  </script>
+
+  <script type="text/x-handlebars" id="about">
+      <h2>About</h2>
+  </script>
+
+  <script type="text/x-handlebars" id="contact">
+      <h2>Contact</h2>
   </script>
 
   <script src="js/libs/jquery-1.10.2.js"></script>
