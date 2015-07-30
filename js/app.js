@@ -36,12 +36,6 @@ App.FriendsRoute = Ember.Route.extend({
     model: function () {
         'use strict';
         return App.friends;
-    },
-    actions: {
-        create: function () {
-            'use strict';
-            alert('Hi');
-        }
     }
 });
 
@@ -67,7 +61,12 @@ App.FriendsNewRoute = Ember.Route.extend({
 });
 
 App.FriendsNewController = Ember.ObjectController.extend({
-
+    actions: {
+        create: function () {
+            'use strict';
+            alert('Hi');
+        }
+    }
 });
 
 App.FailuresIndexRoute = Ember.Route.extend({
