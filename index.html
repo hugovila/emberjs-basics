@@ -25,6 +25,7 @@
 
   <script type="text/x-handlebars" id="friends">
       <h2>My Friends</h2>
+      {{link-to 'Add new friend' 'friends.new'}}
 
       <ul>
           {{#each friend in model}}
@@ -42,6 +43,22 @@
       <p>
           About: {{about}}
       </p>
+  </script>
+
+  <script type="text/x-handlebars" id="friends/new">
+      <label>
+          First Name
+      </label>
+      <p>{{input class="form-control" value=firstName}} - {{firstName}}</p>
+      <label>
+          Last Name
+      </label>
+      <p>{{input value=lastName}}</p>
+      <label>About</label>
+      <p>
+         {{textarea value=about}}
+      </p>
+      <button {{action "create"}}>Create</button>
   </script>
 
   <script type="text/x-handlebars" id="friends/index">

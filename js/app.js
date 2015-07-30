@@ -17,6 +17,7 @@ App.Router.map(function () {
     this.resource('friends', function () {
         this.resource('issues');
         this.route('about', {path: "/:friends_id/about"});
+        this.route('new');
     });
 
     this.resource('failures', function () {
@@ -49,6 +50,22 @@ App.FriendsAboutRoute = Ember.Route.extend({
     model: function (params) {
         'use strict';
         return App.friends.findBy('id', parseInt(params.friends_id, 10));
+    }
+});
+
+App.FriendsNewRoute = Ember.Route.extend({
+    model: function () {
+        'use strict';
+        return {firstName: "", lastName: "", about: ""};
+    }
+});
+
+App.FriendsNewController = Ember.ObjectController.extend({
+    actions: {
+        create: function () {
+            'use strict';
+            alert('Hi');
+        }
     }
 });
 
