@@ -58,11 +58,12 @@ App.FriendsAboutRoute = Ember.Route.extend({
 App.FriendsNewRoute = Ember.Route.extend({
     model: function () {
         'use strict';
-        return {firstName: "", lastName: "", about: ""};
+        return {id: App.friends.length + 1, firstName: "", lastName: "", about: ""};
     }
 });
 
 App.FriendsNewController = Ember.Controller.extend({
+    needs: 'friends',
     isInvalid: true,
 
     validForm: function () {
@@ -78,7 +79,9 @@ App.FriendsNewController = Ember.Controller.extend({
     actions: {
         create: function () {
             'use strict';
-            alert('Hi');
+            var newFriend = Ember.copy(this.model);
+            this.get('controllers.friends').addObject(newFriend);
+            this.transitionToRoute('friends');
         }
     }
 });
