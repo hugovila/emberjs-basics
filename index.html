@@ -55,10 +55,10 @@
       </label>
       <p>{{input value=lastName}}</p>
       <label>About</label>
-      <p>
+      <p {{bind-attr class=isBombon}}>
          {{textarea value=about}}
       </p>
-      <button {{action "create"}}>Create</button>
+      <button {{action "create"}} {{bind-attr disabled=isInvalid}}>Create</button>
   </script>
 
   <script type="text/x-handlebars" id="friends/index">

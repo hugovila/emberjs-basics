@@ -1,3 +1,5 @@
+/*global alert */
+
 var Ember, App;
 
 App = Ember.Application.create();
@@ -61,6 +63,18 @@ App.FriendsNewRoute = Ember.Route.extend({
 });
 
 App.FriendsNewController = Ember.ObjectController.extend({
+    isInvalid: true,
+
+    validForm: function () {
+        'use strict';
+        if (this.get('firstName') !== "" && this.get('lastName') !== "") {
+            this.set('isInvalid', false);
+        } else {
+            this.set('isInvalid', true);
+        }
+    }.observes('firstName', 'lastName'),
+
+    isBombon: 'Chocolate',
     actions: {
         create: function () {
             'use strict';
