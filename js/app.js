@@ -5,9 +5,9 @@ var Ember, App;
 App = Ember.Application.create();
 
 App.friends = [
-    { id: 1, name: "John", about: "Funny" },
-    { id: 2, name: "Mary", about: "Smart" },
-    { id: 3, name: "Henry", about: "Kind" }
+    { id: 1, firstName: "John", lastName: "", about: "Funny" },
+    { id: 2, firstName: "Mary", lastName: "", about: "Smart" },
+    { id: 3, firstName: "Henry", lastName: "", about: "Kind" }
 ];
 
 App.Router.map(function () {

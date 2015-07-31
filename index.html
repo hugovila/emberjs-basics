@@ -29,7 +29,7 @@
 
       <ul>
           {{#each friend in model}}
-          <li>{{#link-to 'friends.about' friend}} {{friend.name}} {{/link-to}}</li>
+          <li>{{#link-to 'friends.about' friend}} {{friend.firstName}} {{/link-to}}</li>
           {{/each}}
       </ul>
 
@@ -38,7 +38,7 @@
 
   <script type="text/x-handlebars" id="friends/about">
       <p>
-          Name: {{name}}
+          Name: {{firstName}}
       </p>
       <p>
           About: {{about}}
