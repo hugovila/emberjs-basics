@@ -49,14 +49,14 @@
       <label>
           First Name
       </label>
-      <p>{{input class="form-control" value=firstName}} - {{firstName}}</p>
+      <p>{{input class="form-control" value=model.firstName}} - {{model.firstName}}</p>
       <label>
           Last Name
       </label>
-      <p>{{input value=lastName}}</p>
+      <p>{{input value=model.lastName}}</p>
       <label>About</label>
       <p {{bind-attr class=isBombon}}>
-         {{textarea value=about}}
+         {{textarea value=model.about}}
       </p>
       <button {{action "create"}} {{bind-attr disabled=isInvalid}}>Create</button>
   </script>
