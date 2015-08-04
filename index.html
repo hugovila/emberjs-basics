@@ -27,6 +27,7 @@
       <h2>My Friends</h2>
       {{link-to 'Add new friend' 'friends.new'}}
 
+      <h3>Best friends number: {{bestNumber}}</h3>
       <ul>
           {{#each friend in model}}
           <li>{{#link-to 'friends.about' friend}} {{friend.firstName}} {{/link-to}}</li>

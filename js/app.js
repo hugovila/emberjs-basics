@@ -17,9 +17,9 @@ App.Friend = Ember.Object.extend({
 });
 
 App.friends = [
-    App.Friend.create({ id: 1, firstName: "John", lastName: "", birthday: new Date('1982-06-21'), about: "Funny" }),
-    App.Friend.create({ id: 2, firstName: "Mary", lastName: "", birthday: new Date('1982-06-21'), about: "Smart" }),
-    App.Friend.create({ id: 3, firstName: "Henry", lastName: "", birthday: new Date('1982-06-21'), about: "Kind" })
+    App.Friend.create({ id: 1, firstName: "John",  lastName: "", best: true,  birthday: new Date('1982-06-21'), about: "Funny" }),
+    App.Friend.create({ id: 2, firstName: "Mary",  lastName: "", best: true,  birthday: new Date('1982-06-21'), about: "Smart" }),
+    App.Friend.create({ id: 3, firstName: "Henry", lastName: "", best: false, birthday: new Date('1982-06-21'), about: "Kind"  })
 ];
 
 App.Router.map(function () {
@@ -72,6 +72,13 @@ App.FriendsNewRoute = Ember.Route.extend({
         'use strict';
         return {id: App.friends.length + 1, firstName: "", lastName: "", about: ""};
     }
+});
+
+App.FriendsController = Ember.ArrayController.extend({
+    bestNumber: function () {
+        'use strict';
+        return this.filterBy('best', true).get('length');
+    }.property('this.@each.best')
 });
 
 App.FriendsNewController = Ember.Controller.extend({
