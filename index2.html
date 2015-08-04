@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Ember Starter Kit</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <script type="text/x-handlebars">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+
+          <h1>Ember Application</h1>
+
+          {{user-card username=model.username fullName=model.fullName}}
+
+          {{outlet}}
+
+        </div>
+      </div>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" id="components/user-card">
+    <h1>{{username}}</h1>
+    <h2>{{fullName}}</h2>
+  </script>
+
+
+  <script src="js/libs/jquery-1.10.2.js"></script>
+  <script src="js/libs/ember-template-compiler-1.12.0.js"></script>
+  <script src="js/libs/ember-1.12.0.debug.js"></script>
+  <script src="js/app2.js"></script>
+  <!-- to activate the test runner, add the "?test" query string parameter -->
+  <script src="tests/runner.js"></script>
+
+</body>
+</html>
