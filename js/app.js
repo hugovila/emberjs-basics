@@ -1,13 +1,25 @@
-/*global alert */
+/*global alert, console */
 
 var Ember, App;
 
 App = Ember.Application.create();
 
+App.Friend = Ember.Object.extend({
+    age: function () {
+        'use strict';
+        var birth = this.get('birthday'),
+            today = new Date(),
+            age = today.getFullYear() - birth.getFullYear(),
+            month = today.getMonth() - birth.getMonth();
+        if (month < 0 || (month === 0 && today.getDate() - birth.getDate())) { age = age - 1; }
+        return age;
+    }.property('birthday')
+});
+
 App.friends = [
-    { id: 1, firstName: "John", lastName: "", about: "Funny" },
-    { id: 2, firstName: "Mary", lastName: "", about: "Smart" },
-    { id: 3, firstName: "Henry", lastName: "", about: "Kind" }
+    App.Friend.create({ id: 1, firstName: "John", lastName: "", birthday: new Date('1982-06-21'), about: "Funny" }),
+    App.Friend.create({ id: 2, firstName: "Mary", lastName: "", birthday: new Date('1982-06-21'), about: "Smart" }),
+    App.Friend.create({ id: 3, firstName: "Henry", lastName: "", birthday: new Date('1982-06-21'), about: "Kind" })
 ];
 
 App.Router.map(function () {
