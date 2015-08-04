@@ -17,6 +17,15 @@ App.ApplicationRoute = Ember.Route.extend({
     }
 });
 
+App.UserCardComponent = Ember.Component.extend({
+  tagName: 'a',
+  classNames: ['card', 'user', 'text-capitalize'],
+  attributeBindings: ['customHref:href'],
+  customHref: 'https://en.wikipedia.org/wiki/Louis_Armstrong',
+  classNameBindings: 'isEnabled:enabled:disabled',
+  isEnabled: false
+});
+
 App.Router.map(function () {
     // put your routes here
 
