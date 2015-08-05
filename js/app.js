@@ -51,6 +51,7 @@ App.FriendsRoute = Ember.Route.extend({
         'use strict';
         return Ember.$.getJSON('http://localhost:4567/friends').then(function (data) {
             return data.map(function (item) {
+                item.birthday = new Date(item.birthday);
                 return App.Friend.create(item);
             });
         });
@@ -68,6 +69,7 @@ App.FriendsAboutRoute = Ember.Route.extend({
     model: function (params) {
         'use strict';
         return Ember.$.getJSON('http://localhost:4567/friends/' + params.friend_id).then(function (item) {
+            item.birthday = new Date(item.birthday);
             return App.Friend.create(item);
         });
     }
