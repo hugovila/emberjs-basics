@@ -49,7 +49,11 @@ App.IndexRoute = Ember.Route.extend({
 App.FriendsRoute = Ember.Route.extend({
     model: function () {
         'use strict';
-        return Ember.$.getJSON('http://localhost:4567/friends');
+        return Ember.$.getJSON('http://localhost:4567/friends').then(function (data) {
+            return data.map(function (item) {
+                return App.Friend.create(item);
+            });
+        });
     }
 });
 
@@ -63,7 +67,9 @@ App.FriendsIndexRoute = Ember.Route.extend({
 App.FriendsAboutRoute = Ember.Route.extend({
     model: function (params) {
         'use strict';
-        return App.friends.findBy('id', parseInt(params.friends_id, 10));
+        return Ember.$.getJSON('http://localhost:4567/friends/' + params.friend_id).then(function (item) {
+            return App.Friend.create(item);
+        });
     }
 });
 

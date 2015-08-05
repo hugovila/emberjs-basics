@@ -8,9 +8,16 @@ FRIENDS = [
     { id: 4, firstName: "Bonbón", lastName: "", best: false, birthday: Date.strptime('1982-06-13'), about: "Aló"   }
 ];
 
-get '/friends' do
+before do
     response.headers['Access-Control-Allow-Origin'] = "*"
+end
+
+get '/friends' do
     json FRIENDS
+end
+
+get '/friends/:id' do
+    json FRIENDS.find { |f| f[:id] == params[:id].to_i }
 end
 
 get '/' do
