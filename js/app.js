@@ -16,11 +16,11 @@ App.Friend = Ember.Object.extend({
     }.property('birthday')
 });
 
-App.friends = [
-    App.Friend.create({ id: 1, firstName: "John",  lastName: "", best: true,  birthday: new Date('1982-06-21'), about: "Funny" }),
-    App.Friend.create({ id: 2, firstName: "Mary",  lastName: "", best: true,  birthday: new Date('1982-06-21'), about: "Smart" }),
-    App.Friend.create({ id: 3, firstName: "Henry", lastName: "", best: false, birthday: new Date('1982-06-21'), about: "Kind"  })
-];
+// App.friends = [
+//     App.Friend.create({ id: 1, firstName: "John",  lastName: "", best: true,  birthday: new Date('1982-06-21'), about: "Funny" }),
+//     App.Friend.create({ id: 2, firstName: "Mary",  lastName: "", best: true,  birthday: new Date('1982-06-21'), about: "Smart" }),
+//     App.Friend.create({ id: 3, firstName: "Henry", lastName: "", best: false, birthday: new Date('1982-06-21'), about: "Kind"  })
+// ];
 
 App.Router.map(function () {
     // put your routes here
