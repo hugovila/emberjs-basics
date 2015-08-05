@@ -18,6 +18,10 @@
 
           {{user-card user=model}}
 
+          {{#info-panel title="Title info panel"}}
+          content
+          {{/info-panel}}
+
           {{outlet}}
 
         </div>
@@ -25,9 +29,20 @@
     </div>
   </script>
 
+  <script type="text/x-handlebars" id="components/info-panel">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        {{title}}
+      </div>
+      <div class="panel-body">
+        {{yield}}
+      </div>
+    </div>
+  </script>
+
   <script type="text/x-handlebars" id="components/user-card">
-    <h1>{{user.username}}</h1>
-    <h2>{{user.fullName}}</h2>
+    {{#info-panel title=user.fullName}}
+    <h2>User Name: {{user.username}}</h2>
 
     {{#if showAbout}}
       <button {{action "toggleAboutBlock"}}>Hide details</button>
@@ -37,6 +52,7 @@
     {{else}}
       <button {{action "toggleAboutBlock"}}>Show details</button>
     {{/if}}
+    {{/info-panel}}
   </script>
 
 
