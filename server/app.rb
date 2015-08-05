@@ -9,6 +9,7 @@ FRIENDS = [
 ];
 
 get '/friends' do
+    response.headers['Access-Control-Allow-Origin'] = "*"
     json FRIENDS
 end
 

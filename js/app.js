@@ -49,7 +49,7 @@ App.IndexRoute = Ember.Route.extend({
 App.FriendsRoute = Ember.Route.extend({
     model: function () {
         'use strict';
-        return App.friends;
+        return Ember.$.getJSON('http://localhost:4567/friends');
     }
 });
 
