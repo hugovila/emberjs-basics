@@ -13,6 +13,7 @@ before do
 end
 
 get '/friends' do
+    sleep 2
     json FRIENDS
 end
 
