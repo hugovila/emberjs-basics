@@ -78,7 +78,7 @@ App.FriendsAboutRoute = Ember.Route.extend({
 App.FriendsNewRoute = Ember.Route.extend({
     model: function () {
         'use strict';
-        return {id: App.friends.length + 1, firstName: "", lastName: "", about: ""};
+        return { firstName: "", lastName: "", about: "" };
     }
 });
 
@@ -106,9 +106,15 @@ App.FriendsNewController = Ember.Controller.extend({
     actions: {
         create: function () {
             'use strict';
-            var newFriend = Ember.copy(this.model);
-            this.get('controllers.friends').addObject(newFriend);
-            this.transitionToRoute('friends');
+            var newFriend = Ember.copy(this.model),
+                friends = this.get('controllers.friends'),
+                controller = this;
+
+            Ember.$.post('http://localhost:4567/friends', newFriend).then(function (item) {
+                item.birthday = new Date(item.birthday);
+                friends.addObject(App.Friend.create(item));
+                controller.transitionToRoute('friends');
+            });
         }
     }
 });
