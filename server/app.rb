@@ -1,5 +1,14 @@
 require 'sinatra'
 require 'sinatra/json'
+require 'rack/cors'
+require 'json'
+
+use Rack::Cors do
+    allow do
+        origins '*'
+        resource '*', :headers => :any, :methods => [ :get, :post, :options ]
+    end
+end
 
 FRIENDS = [
     { id: 1, firstName: "John",   lastName: "", best: true,  birthday: Date.strptime('1982-06-21'), about: "Funny" },
@@ -13,18 +22,19 @@ before do
 end
 
 get '/friends' do
-    sleep 2
-    json FRIENDS
+    #sleep 2
+    json friends: FRIENDS
 end
 
 post '/friends' do
+    params = JSON.parse(request.body.read)["friend"]
     friend = { id: FRIENDS.size + 1, firstName: params["firstName"], lastName: params["lastName"], about: params["about"], best: true, birthday: Date.strptime("2001-12-24") }
     FRIENDS << friend
-    json friend
+    json friend: friend
 end
 
 get '/friends/:id' do
-    json FRIENDS.find { |f| f[:id] == params[:id].to_i }
+    json friend: FRIENDS.find { |f| f[:id] == params[:id].to_i }
 end
 
 get '/' do

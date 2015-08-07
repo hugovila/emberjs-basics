@@ -1,10 +1,20 @@
 /*global alert, console */
 
-var Ember, App;
+var Ember, App, DS;
 
 App = Ember.Application.create();
 
-App.Friend = Ember.Object.extend({
+App.ApplicationAdapter =  DS.RESTAdapter.extend({
+    host: 'http://localhost:4567'
+});
+
+App.Friend = DS.Model.extend({
+    firstName: DS.attr(),
+    lastName: DS.attr(),
+    about: DS.attr('string'),
+    best: DS.attr('boolean'),
+    birthday: DS.attr('date'),
+
     age: function () {
         'use strict';
         var birth = this.get('birthday'),
@@ -49,12 +59,7 @@ App.IndexRoute = Ember.Route.extend({
 App.FriendsRoute = Ember.Route.extend({
     model: function () {
         'use strict';
-        return Ember.$.getJSON('http://localhost:4567/friends').then(function (data) {
-            return data.map(function (item) {
-                item.birthday = new Date(item.birthday);
-                return App.Friend.create(item);
-            });
-        });
+        return this.store.find('friend'); /* GET /friends */
     }
 });
 
@@ -68,10 +73,7 @@ App.FriendsIndexRoute = Ember.Route.extend({
 App.FriendsAboutRoute = Ember.Route.extend({
     model: function (params) {
         'use strict';
-        return Ember.$.getJSON('http://localhost:4567/friends/' + params.friend_id).then(function (item) {
-            item.birthday = new Date(item.birthday);
-            return App.Friend.create(item);
-        });
+        return this.store.find('friend', params.friend_id);
     }
 });
 
@@ -90,7 +92,6 @@ App.FriendsController = Ember.ArrayController.extend({
 });
 
 App.FriendsNewController = Ember.Controller.extend({
-    needs: 'friends',
     isInvalid: true,
 
     validForm: function () {
@@ -106,13 +107,14 @@ App.FriendsNewController = Ember.Controller.extend({
     actions: {
         create: function () {
             'use strict';
-            var newFriend = Ember.copy(this.model),
-                friends = this.get('controllers.friends'),
+            var newFriend = this.store.createRecord('friend', {
+                firstName: this.get('model.firstName'),
+                lastName: this.get('model.lastName'),
+                about: this.get('model.about')
+            }),
                 controller = this;
 
-            Ember.$.post('http://localhost:4567/friends', newFriend).then(function (item) {
-                item.birthday = new Date(item.birthday);
-                friends.addObject(App.Friend.create(item));
+            newFriend.save().then(function () {
                 controller.transitionToRoute('friends');
             });
         }
