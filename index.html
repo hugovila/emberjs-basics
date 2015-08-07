@@ -38,7 +38,9 @@
       <h3>Best friends number: {{bestNumber}}</h3>
       <ul>
           {{#each friend in model}}
+          {{#unless friend.isNew}}
           <li>{{#link-to 'friends.about' friend}} {{friend.firstName}} {{/link-to}}</li>
+          {{/unless}}
           {{/each}}
       </ul>
 

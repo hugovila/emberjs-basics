@@ -22,7 +22,7 @@ before do
 end
 
 get '/friends' do
-    #sleep 2
+    sleep 2
     json friends: FRIENDS
 end
 
@@ -30,6 +30,7 @@ post '/friends' do
     params = JSON.parse(request.body.read)["friend"]
     friend = { id: FRIENDS.size + 1, firstName: params["firstName"], lastName: params["lastName"], about: params["about"], best: true, birthday: Date.strptime("2001-12-24") }
     FRIENDS << friend
+    sleep 2
     json friend: friend
 end
 
